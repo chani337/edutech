@@ -40,28 +40,20 @@ const Typography = () => {
     )
 
     if (!slideItem) {
-      console.log('📸 slideNum - 슬라이드쇼 항목 없음')
       return []
     }
 
     let len = slideItem.pro_detail_contnum || 25 // NULL이면 기본값 25
     let url = slideItem.pro_detail_url
 
-    console.log('📸 slideNum - 원본 URL:', url)
-    console.log('📸 slideNum - 슬라이드 개수:', len)
-
     // URL 변환
     url = convertImageUrl(url)
-
-    console.log('📸 slideNum - 변환된 URL:', url)
 
     let slideNmlist = []
 
     for (let i = 0; i < len; i++) {
       slideNmlist.push(`${url}/${i}.jpg`)
     }
-
-    console.log('📸 slideNum - 생성된 URL 리스트:', slideNmlist.slice(0, 3))
 
     return slideNmlist
   }
