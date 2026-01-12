@@ -77,7 +77,7 @@ public class DbMainService {
 		
 		List<DBUser> requestList = null;
 		
-		if(mem_level.equals("마스터")) {
+		if(mem_level.equals("마스터") || mem_level.equals("관리자")) {
 			requestList = mapper.requestDbList();
 		}
 		else if(clas_code != null && !clas_code.trim().isEmpty()) {
