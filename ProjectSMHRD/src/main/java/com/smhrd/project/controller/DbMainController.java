@@ -87,8 +87,8 @@ public class DbMainController {
 		JsonArray requestArr = new JsonArray();
 		
 		List<DBUser> requestList = service.dbRequestList(mem_level,class_code);
-		//1. 마스터 -> DB요청 전체
-		if(mem_level.equals("마스터")) {
+		//1. 마스터 또는 관리자 -> DB요청 전체
+		if(mem_level.equals("마스터") || mem_level.equals("관리자")) {
 			
 		
 		for (int i = 0; i < requestList.size(); i++) {
