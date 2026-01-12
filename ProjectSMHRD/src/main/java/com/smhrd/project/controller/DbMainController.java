@@ -195,8 +195,11 @@ public class DbMainController {
 
 			Map<String, Object> info = service.getDbRequestUser(dbOkUser.getMem_email());
 
-			JsonElement jsonElement = gson.toJsonTree(info);
-			JsonObject classJO = jsonElement.getAsJsonObject();
+			JsonObject classJO = new JsonObject();
+			if (info != null) {
+				JsonElement jsonElement = gson.toJsonTree(info);
+				classJO = jsonElement.getAsJsonObject();
+			}
 
 			int pro_ctg_num = dbOkUser.getPro_ctg_num();
 			String pro_type = "";
