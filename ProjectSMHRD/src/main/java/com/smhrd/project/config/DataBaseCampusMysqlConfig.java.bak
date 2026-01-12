@@ -1,0 +1,64 @@
+package com.smhrd.project.config;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
+
+@Configuration
+@MapperScan(basePackages = "com.smhrd.project.campusMysqlMapper", sqlSessionFactoryRef = "campusMysqlSessionFactory")
+public class DataBaseCampusMysqlConfig {
+
+	private Map<String, Object> getVendorProperties() {
+		Map<String, Object> properties = new HashMap<>();
+		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+		return properties;
+	}
+
+	@Bean(name = "campusMysqlDataSource")
+	@ConfigurationProperties(prefix = "spring.datasource.campus-mysql")
+	public DataSource campusMysqlDataSource() {
+		return DataSourceBuilder.create().build();
+	}
+
+	@Bean(name = "campusMysqlEntityManagerFactory")
+	public LocalContainerEntityManagerFactoryBean campusMysqlEntityManagerFactory(EntityManagerFactoryBuilder builder,
+			@Qualifier("campusMysqlDataSource") DataSource dataSource) {
+		return builder.dataSource(campusMysqlDataSource()).packages("com.smhrd.project.campusMysqlDomain") // Oracle 엔티티
+																											// 패키지 경로
+				.persistenceUnit("campusMysql").properties(getVendorProperties()).build();
+	}
+
+	@Bean(name = "campusMysqlTransactionManager")
+	public PlatformTransactionManager campusMysqlTransactionManager(
+			@Qualifier("campusMysqlEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
+		return new JpaTransactionManager(entityManagerFactory);
+	}
+
+	@Bean(name = "campusMysqlSessionFactory")
+	public SqlSessionFactory MysqlSqlSessionFactory(@Qualifier("campusMysqlDataSource") DataSource dataSource)
+			throws Exception {
+		SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
+		sessionFactoryBean.setDataSource(dataSource);
+		Resource[] resources = new PathMatchingResourcePatternResolver()
+				.getResources("classpath*:com/smhrd/project/mapper/CampusMysqlMapper.xml");
+		sessionFactoryBean.setMapperLocations(resources);
+		return sessionFactoryBean.getObject();
+	}
+}

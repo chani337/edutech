@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.smhrd.project.mapper.UserMapper">
+
+  <insert id="join" parameterType="com.smhrd.project.domain.User">
+  	insert into member(mem_email, mem_name, mem_level, class_code) values(#{mem_email},#{mem_name},#{mem_level},#{class_code})
+  </insert>
+
+  <select id="login" resultType="com.smhrd.project.domain.User">
+   select * from member where mem_email=#{mem_email}
+  </select>
+  
+    <select id="permissionUpdate" parameterType="com.smhrd.project.domain.User" >
+ 	update member set mem_level=#{mem_level} where mem_email=#{mem_email}
+  </select>
+  
+  <select id="getUserInfo" parameterType="java.util.Map" resultType="com.smhrd.project.domain.User">
+		select mem_name ,class_code from member where class_code=(select class_code from member where mem_email='${mem_email}') and mem_level='관리자';
+	</select>
+	
+	<select id="getClasses" resultType="java.util.Map">
+		select c.class_code AS class_code, c.host_code AS host_code, curri.curri_name AS curri_name, c.curri_cnt AS curri_cnt from class_ c , curriculum curri where c.curri_code=curri.curri_code and c.class_start between  '2022-12-20' and now() ;
+	</select>
+  
+<!--   <select id="users" resultType="com.smhrd.project.domain.User">
+   select * from member 
+  </select> -->
+<!-- select * from member where mem_email=#{mem_email} -->
+</mapper>

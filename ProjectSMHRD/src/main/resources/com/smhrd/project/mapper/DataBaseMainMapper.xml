@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.smhrd.project.mapper.DataBaseMainMapper">
+
+	
+	<select id="userCheck" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM db where db_user = '${userId}'; 
+	</select>
+	
+	<insert id="reqeustUserInsert" parameterType="com.smhrd.project.domain.DBUser">
+		INSERT INTO db(mem_email,db_type,db_user,db_pw,db_etc,db_applydate,db_makedate,pro_ctg_num,db_location,class_code) VALUES(#{mem_email},#{db_type},#{db_user},#{db_pw},#{db_etc},now(),null,#{pro_ctg_num},#{db_location},#{class_code})
+	</insert>
+	
+	<select id="getClasTeacherCode" parameterType="java.util.Map" resultType="java.util.Map">
+		select mem.mem_name as teacher_name, curriculum.curri_name as curri_name 
+		from (select * from member where class_code=(select class_code from member where mem_email='${mem_email}') and mem_level='관리자' ) as mem, curriculum, class_ 
+		where mem.class_code = class_.class_code and class_.curri_code = curriculum.curri_code;
+	</select>
+	
+	
+	<select id="getUserName" parameterType="java.util.Map" resultType="string">
+		select mem_name from member where mem_email='${mem_email}';
+	</select>
+	
+	<select id="getCuriName" parameterType="java.util.Map" resultType="string">
+		select curri_name from curriculum where curri_code = (select curri_code from class_ where class_code = #{class_code})
+	</select>
+	
+	<select id="requestDbList" resultType="com.smhrd.project.domain.DBUser">
+		select mem_email, db_type, db_user, db_pw, db_etc, pro_ctg_num, db_location from db where db_makedate is null;
+	</select>
+	
+	<select id="requestDbListTeacher" resultType="com.smhrd.project.domain.DBUser">
+		select mem_email, db_type, db_user, db_pw, db_etc, pro_ctg_num, db_location from db where db_makedate is null and mem_email in (select mem_email from member where class_code = #{class_code});
+	</select>
+	
+	<select id="getDbOkList" resultType="com.smhrd.project.domain.DBUser"  parameterType="java.util.Map">
+		select mem_email, db_type, db_user, db_pw, db_etc, pro_ctg_num, db_location from db where db_makedate is not null;
+	</select>
+	
+	<select id="updateDBrequest" parameterType="java.util.Map" >
+		update db set db_makedate=now() where db_user='${db_user}' and db_pw='${db_pw}';
+	</select>
+
+
+
+</mapper>

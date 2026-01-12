@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.smhrd.project.mapper.ProjectMapper">
+
+	<!-- 프로젝트갯수 -->
+	<select id="getProjectCnt" resultType="String">
+		select count(pro_num) from pro_basic;
+	</select>
+
+	<!-- 프로젝트리스트 -->	
+	<!-- <select id="projectList" resultType="com.smhrd.project.domain.ProjectList">
+		select pro_num, pro_name, pro_theme, pro_team, pro_prize, pro_type, pro_ctg_num,  ctg_num, ctg_num2, dtype_num, dtype_num2 from pro_basic
+	</select>
+	-->
+	<select id="projectList" resultType="com.smhrd.project.domain.ProjectList">
+		select * from pro_list_view;
+	</select>
+	 
+	<!-- 프로젝트 타입리스트 -->	
+	<!--<select id="projectListType" parameterType="map" resultType="com.smhrd.project.domain.ProjectList">
+		select pro_num, pro_name, pro_theme, pro_team, pro_prize, pro_type, pro_ctg_num, pro_type, pro_type, ctg_num, ctg_num2, dtype_num, dtype_num2 from pro_basic where ${col}=#{pro_val}
+	</select>-->	
+	<select id="projectListType" parameterType="map" resultType="com.smhrd.project.domain.ProjectList">
+		select * from pro_list_view where ${col}=#{pro_val}
+	</select>
+	
+	<!-- 프로젝트 키워드리스트 -->	
+	<!--<select id="projectListKeyword" resultType="com.smhrd.project.domain.ProjectList">
+		select pro_num, pro_name, pro_theme, pro_team, pro_prize, pro_type, pro_ctg_num, pro_type, pro_type, ctg_num, ctg_num2, dtype_num, dtype_num2 from pro_basic where ctg_num=#{keyword}
+	</select>-->	
+	<select id="projectListKeyword" resultType="com.smhrd.project.domain.ProjectList">
+		select * from pro_list_view where ctg_num=#{keyword}
+	</select>
+	
+	<!-- PPT사진 -->
+	<select id="projectImg" parameterType="int" resultType="String">
+		select pro_detail_url from pro_detail where pro_num =#{pro_num} and pro_detail_type ='PPT'
+	</select> 
+	
+	<!-- 프로젝트 기본정보 -->
+	<select id="pro_basic" parameterType="int" resultType="com.smhrd.project.domain.ProBasic">
+		select pro_name, pro_theme, pro_team, pro_prize, pro_type, pro_nutshell, mem1, db_num from pro_basic where pro_num = #{pro_num}
+	</select>
+	
+	<!-- 기획서 -->
+	<select id="docu_plan" parameterType="int" resultType="String">
+		select docu_plan from document where pro_num=#{pro_num}
+	</select>
+	
+	<!-- 프로젝트 기능 -->
+	<select id="pro_fun" parameterType="int" resultType="com.smhrd.project.domain.ProFunction">
+		select * from pro_function where pro_num = #{pro_num}
+	</select>
+	
+	<!-- 프로젝트 내용(시연영상, ppt등) -->
+	<select id="pro_detail" parameterType="int" resultType="com.smhrd.project.domain.ProDetail">
+		select * from pro_detail where pro_num = #{pro_num}
+	</select>
+	
+	<!-- 부폼 및 회로도 -->
+	<select id="pro_iot" parameterType="int" resultType="com.smhrd.project.domain.ProIot">
+		select * from pro_iot where pro_num = #{pro_num}
+	</select>
+	
+	<!-- 빅데이터정의서 -->
+	<select id="pro_danaly" parameterType="int" resultType="com.smhrd.project.domain.ProDanaly">
+		select * from pro_danaly where pro_num = #{pro_num}
+	</select>
+	
+	<!-- 과정명 -->
+	<select id="pro_class" parameterType="int" resultType="com.smhrd.project.domain.ProClass">
+		select curri.curri_name, c.curri_cnt from class_ c Left outer join curriculum curri on c.curri_code = curri.curri_code where c.class_code = (select class_code from member where mem_email = (select mem1 from pro_basic where pro_num = #{pro_num})) 
+	</select>
+	
+</mapper>

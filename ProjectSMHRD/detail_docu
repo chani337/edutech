@@ -1,0 +1,11 @@
+--package
+com.smhrd.project : 최상위 패키지, 모든 자바 파일은 해당 패키지 아래 있어야지만 자동 설정 가능
+com.smhrd.project.config : 설정파일(jwt, cors, security 등)
+com.smhrd.project.controller : 컨트롤러 (user/project/tech별로 따로 작성)
+com.smhrd.project.database : db 관련 설정파일 (mybatis, JPA)
+com.smhrd.project.domain : VO 
+com.smhrd.project.mapper : mybatis mapper 인터페이스(user/project/tech별로 따로 작성)
+com.smhrd.project.repo : JPA repository(user/project/tech별로 따로 작성)
+com.smhrd.project.service : 기능 로직 클래스 (user/project/tech별로 따로 작성)
+
+--annotation

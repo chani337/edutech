@@ -1,0 +1,129 @@
+// Here you can add other styles
+body {
+  font-family: 'InfinitySans-RegularA1';
+}
+#nav_style {
+  margin-top: 0px !important;
+}
+.doc_img {
+  max-width: 90%;
+  width: auto;  
+  height: 30em;
+}
+
+#video_style {
+  width: 100%;
+}
+
+.tab_col {
+  text-align: center;
+  border-top: 1.5px solid #e7e7e7;
+}
+
+.tab_th {
+  border: 1px solid #e7e7e7;
+  background-color: #f5f5f5;
+}
+.th-col-1 {
+  width: 20%;
+}
+
+.tab_td {
+  border: 1px solid #e7e7e7;
+}
+.td-col {
+  text-align: center;
+}
+.td_normal {
+  padding: 9px 20px 9px 16px;
+}
+.td_list {
+  padding-top: 15px;
+}
+
+@font-face {
+  font-family: 'InfinitySans-RegularA1';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.card-body {
+  font-family: 'InfinitySans-RegularA1';
+}
+
+.h1-title {
+  color: #ff9000;
+}
+
+.h3-title {
+  color: #0c8be4;
+  margin-right: 10px;
+}
+.div-align {
+  display: flex;
+  align-items: center;
+}
+#div-bg {
+  background-color: white !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f5faff !important;
+}
+
+.carousel-control-next-icon {
+  background-color: grey !important;
+}
+.carousel-control-prev-icon {
+  background-color: grey !important;
+}
+
+.css-1rhbuit-multiValue {
+  background-color: #97dcfd !important;
+}
+
+#post-title,
+#post-editor,
+#tch-file {
+  margin-bottom: 10px;
+}
+
+.col-12,
+.col-md-12 {
+  margin: 15px 0px !important;
+}
+//0922 추가
+.pagination {
+  display: flex !important;
+  list-style: none !important;
+  justify-content: center !important;
+}
+.card-title {
+  font-size: 18px !important;
+  word-break: keep-all !important;
+  text-align: center !important;
+}
+.card {
+  height: 100%;
+}
+.btn {
+  margin: 3px;
+  color: white;
+}
+.header-align {
+  display: flex;
+  justify-content: space-between;
+}
+h1 {
+  font-size: 1.5em;
+}
+
+.for-center {
+  justify-content: space-around;
+  margin-bottom: 1em !important;
+}
+.input-group {
+  justify-content: space-around;
+}
