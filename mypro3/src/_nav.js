@@ -162,7 +162,7 @@ const list = [
   {
     component: CNavItem,
     name: 'DB계정 요청확인페이지',
-    to: '/base/forms/db/user_ok',
+    to: '/forms/db/user_ok',
     level: 2,
     icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
