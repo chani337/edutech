@@ -1,0 +1,302 @@
+{"properties": [
+  {
+    "name": "spring.datasource.main.url",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.main.url'"
+  },
+  {
+    "name": "spring.datasource.main.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.main.username'"
+  },
+  {
+    "name": "spring.datasource.main.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.main.password'"
+  },
+  {
+    "name": "spring.datasource.main.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.main.driver-class-name'"
+  },
+  {
+    "name": "spring.datasource.suboracle.url",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.suboracle.url'"
+  },
+  {
+    "name": "spring.datasource.suboracle.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.suboracle.username'"
+  },
+  {
+    "name": "spring.datasource.suboracle.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.suboracle.driver-class-name'"
+  },
+  {
+    "name": "spring.datasource.suboracle.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.suboracle.password'"
+  },
+  {
+    "name": "spring.datasource.suboracle.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.suboracle.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.main.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.main.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.main.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.main.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.main.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.main.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.main.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.main.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.main.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.main.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.main.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.main.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.main.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.main.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.main.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.main.jdbcUrl'"
+  },
+  {
+    "name": "spring.jpa.database_suboracle",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.jpa.database_suboracle'"
+  },
+  {
+    "name": "spring.jpa.hibernate.ddl-auto_suboracle",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.jpa.hibernate.ddl-auto_suboracle'"
+  },
+  {
+    "name": "spring.jpa.database-platform_suboracle",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.jpa.database-platform_suboracle'"
+  },
+  {
+    "name": "spring.jpa.generate-ddl_suboracle",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.jpa.generate-ddl_suboracle'"
+  },
+  {
+    "name": "spring.jpa.hibernate.naming.physical-strategy_suboracle",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.jpa.hibernate.naming.physical-strategy_suboracle'"
+  },
+  {
+    "name": "spring.jpa.show-sql_suboracle",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.jpa.show-sql_suboracle'"
+  },
+  {
+    "name": "spring.datasource.campus-mysql.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.campus-mysql.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.campus-mysql.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.campus-mysql.driver-class-name'"
+  },
+  {
+    "name": "spring.datasource.campus-mysql.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.campus-mysql.password'"
+  },
+  {
+    "name": "spring.datasource.campus-mysql.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.campus-mysql.username'"
+  },
+  {
+    "name": "spring.datasource.aiacademy-mysql.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.aiacademy-mysql.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.aiacademy-mysql.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.aiacademy-mysql.username'"
+  },
+  {
+    "name": "spring.datasource.aiacademy-mysql.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.aiacademy-mysql.password'"
+  },
+  {
+    "name": "spring.datasource.aiacademy-mysql.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.aiacademy-mysql.driver-class-name'"
+  },
+  {
+    "name": "spring.datasource.cgi-mysql.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.cgi-mysql.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.cgi-mysql.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.cgi-mysql.username'"
+  },
+  {
+    "name": "spring.datasource.cgi-mysql.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.cgi-mysql.password'"
+  },
+  {
+    "name": "spring.datasource.cgi-mysql.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.cgi-mysql.driver-class-name'"
+  },
+  {
+    "name": "spring.datasource.aiacademy-oracle.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.aiacademy-oracle.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.aiacademy-oracle.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.aiacademy-oracle.username'"
+  },
+  {
+    "name": "spring.datasource.aiacademy-oracle.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.aiacademy-oracle.password'"
+  },
+  {
+    "name": "spring.datasource.aiacademy-oracle.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.aiacademy-oracle.driver-class-name'"
+  },
+  {
+    "name": "spring.jpa.hibernate.naming.physical-strategy_aiacademyoracle",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.jpa.hibernate.naming.physical-strategy_aiacademyoracle'"
+  },
+  {
+    "name": "spring.datasource.aiacademy-maria.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.aiacademy-maria.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.aiacademy-maria.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.aiacademy-maria.username'"
+  },
+  {
+    "name": "spring.datasource.aiacademy-maria.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.aiacademy-maria.password'"
+  },
+  {
+    "name": "spring.datasource.aiacademy-maria.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.aiacademy-maria.driver-class-name'"
+  },
+  {
+    "name": "spring.datasource.campus-maria.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.campus-maria.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.campus-maria.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.campus-maria.username'"
+  },
+  {
+    "name": "spring.datasource.campus-maria.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.campus-maria.password'"
+  },
+  {
+    "name": "spring.datasource.campus-maria.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.campus-maria.driver-class-name'"
+  },
+  {
+    "name": "spring.datasource.cgi-maria.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.cgi-maria.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.cgi-maria.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.cgi-maria.username'"
+  },
+  {
+    "name": "spring.datasource.cgi-maria.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.cgi-maria.password'"
+  },
+  {
+    "name": "spring.datasource.cgi-maria.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.cgi-maria.driver-class-name'"
+  },
+  {
+    "name": "spring.datasource.campus-oracle.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.campus-oracle.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.campus-oracle.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.campus-oracle.username'"
+  },
+  {
+    "name": "spring.datasource.campus-oracle.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.campus-oracle.password'"
+  },
+  {
+    "name": "spring.datasource.campus-oracle.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.campus-oracle.driver-class-name'"
+  },
+  {
+    "name": "spring.datasource.cgi-oracle.jdbcUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.cgi-oracle.jdbcUrl'"
+  },
+  {
+    "name": "spring.datasource.cgi-oracle.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.cgi-oracle.username'"
+  },
+  {
+    "name": "spring.datasource.cgi-oracle.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.cgi-oracle.password'"
+  },
+  {
+    "name": "spring.datasource.cgi-oracle.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.cgi-oracle.driver-class-name'"
+  }
+]}

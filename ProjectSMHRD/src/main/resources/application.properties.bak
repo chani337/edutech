@@ -1,0 +1,213 @@
+# 
+# https://docs.spring.io/spring-boot/docs/1.1.1.RELEASE/reference/html/common-application-properties.html
+server.servlet.context-path=/project-smhrd
+server.port = 8070
+server.address = 0.0.0.0
+
+# File Upload Settings
+file.upload.local-mode=true
+file.upload.local-path=./data
+file.upload.remote-host=edusmhrd.ddns.net
+file.upload.remote-port=26
+file.upload.remote-username=root
+file.upload.remote-password=smhrd2021
+file.upload.remote-path=/usr/local/data
+
+# Static Resource Settings (for serving project images)
+spring.web.resources.static-locations=file:/Users/mac/Desktop/Project/
+
+#MainDB mysql (Cmapus)
+spring.datasource.main.jdbcUrl=jdbc:mysql://project-db-campus.smhrd.com:3309/project_db?serverTimezone=UTC
+spring.datasource.main.username=project_lsh
+spring.datasource.main.password=project_lsh
+spring.datasource.main.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# JeongBongGyun_230915---------------
+# Property name changed from camel case to kebab case
+# campusOracle  ->  campus-oracle
+#campusOracle
+#spring.datasource.campus-oracle.jdbcUrl=jdbc:oracle:thin:@project-db-campus.smhrd.com:1524:xe
+#spring.datasource.campus-oracle.username=system
+#spring.datasource.campus-oracle.password=smhrd2025
+#spring.datasource.campus-oracle.driver-class-name=oracle.jdbc.OracleDriver
+
+# JeongBongGyun_230912---------------
+#aiacademyOracle
+#spring.datasource.aiacademy-oracle.jdbcUrl=jdbc:oracle:thin:@project-db-stu3.smhrd.com:1524:xe
+#spring.datasource.aiacademy-oracle.username=system
+#spring.datasource.aiacademy-oracle.password=smhrd2022
+#spring.datasource.aiacademy-oracle.driver-class-name=oracle.jdbc.OracleDriver
+
+#cgiOracle
+#spring.datasource.cgi-oracle.jdbcUrl=jdbc:oracle:thin:@project-db-cgi.smhrd.com:1524:xe
+#spring.datasource.cgi-oracle.username=system
+#spring.datasource.cgi-oracle.password=smhrd2024
+#spring.datasource.cgi-oracle.driver-class-name=oracle.jdbc.OracleDriver
+
+#campusMysql
+#spring.datasource.campus-mysql.jdbcUrl=jdbc:mysql://project-db-campus.smhrd.com:3307/
+#spring.datasource.campus-mysql.username=root
+#spring.datasource.campus-mysql.password=smhrd2021
+#spring.datasource.campus-mysql.driver-class-name=com.mysql.cj.jdbc.Driver
+
+#aiacademyMysql
+#spring.datasource.aiacademy-mysql.jdbcUrl=jdbc:mysql://project-db-stu3.smhrd.com:3307/
+#spring.datasource.aiacademy-mysql.username=root
+#spring.datasource.aiacademy-mysql.password=smhrd2022
+#spring.datasource.aiacademy-mysql.driver-class-name=com.mysql.cj.jdbc.Driver
+
+#cgiMysql
+#spring.datasource.cgi-mysql.jdbcUrl=jdbc:mysql://project-db-cgi.smhrd.com:3307/
+#spring.datasource.cgi-mysql.username=root
+#spring.datasource.cgi-mysql.password=smhrd2021
+#spring.datasource.cgi-mysql.driver-class-name=com.mysql.cj.jdbc.Driver
+
+#campusMaria
+#spring.datasource.campus-maria.jdbcUrl=jdbc:mariadb://project-db-campus.smhrd.com:3308/
+#spring.datasource.campus-maria.username=root
+#spring.datasource.campus-maria.password=smhrd2021
+#spring.datasource.campus-maria.driver-class-name=org.mariadb.jdbc.Driver
+
+#aiacademyMaria
+#spring.datasource.aiacademy-maria.jdbcUrl=jdbc:mariadb://project-db-stu3.smhrd.com:3308/
+#spring.datasource.aiacademy-maria.username=root
+#spring.datasource.aiacademy-maria.password=smhrd2022
+#spring.datasource.aiacademy-maria.driver-class-name=org.mariadb.jdbc.Driver
+
+##cgiMaria
+#spring.datasource.cgi-maria.jdbcUrl=jdbc:mysql://project-db-cgi.smhrd.com:3308/
+#spring.datasource.cgi-maria.username=root
+#spring.datasource.cgi-maria.password=smhrd2021
+#spring.datasource.cgi-maria.driver-class-name=org.mariadb.jdbc.Driver
+# JeongBongGyun_230912---------------
+
+#old code
+mybatis.type-aliases-package:com.smhrd.project.mapper
+mybatis.mapper-locations: com/smhrd/project/mapper/*.xml
+
+
+
+#old JPA 
+## dev : create-drop, validate / product : validate 
+#spring.jpa.generate-ddl=false
+#spring.jpa.hibernate.ddl-auto=none
+## Jpa Properties
+#spring.jpa.database=sql-server
+#spring.jpa.properties.hibernate.show_sql=true
+#spring.jpa.properties.hibernate.format_sql=true
+#---------------------------
+
+
+
+# JPA new
+# MainDB
+spring.jpa.database=default
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
+spring.jpa.generate-ddl=true
+spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+
+# aiacademyOracle
+#spring.jpa.database_aiacademyOracle=default
+#spring.jpa.show-sql_aiacademyOracle=true
+#spring.jpa.hibernate.ddl-auto_aiacademyOracle=update
+#spring.jpa.database-platform_aiacademyOracle=org.hibernate.dialect.Oracle12cDialect
+#spring.jpa.generate-ddl_aiacademyOracle=true
+#spring.jpa.hibernate.naming.physical-strategy_aiacademyOracle=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#spring.jpa.properties.hibernate.dialect_aiacademyOracle=org.hibernate.dialect.Oracle12cDialect
+
+#campusOracle
+#spring.jpa.database_campusOracle=default
+#spring.jpa.show-sql_campusOracle=true
+#spring.jpa.hibernate.ddl-auto_campusOracle=update
+#spring.jpa.database-platform_campusOracle=org.hibernate.dialect.Oracle12cDialect
+#spring.jpa.generate-ddl_campusOracle=true
+#spring.jpa.hibernate.naming.physical-strategy_campusOracle=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#spring.jpa.properties.hibernate.dialect_campusOracle=org.hibernate.dialect.Oracle12cDialect
+
+#cgiOracle
+#spring.jpa.database_cgiOracle=default
+#spring.jpa.show-sql_cgiOracle=true
+#spring.jpa.hibernate.ddl-auto_cgiOracle=update
+#spring.jpa.database-platform_cgiOracle=org.hibernate.dialect.Oracle11cDialect
+#spring.jpa.generate-ddl_cgiOracle=true
+#spring.jpa.hibernate.naming.physical-strategy_cgiOracle=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#spring.jpa.properties.hibernate.dialect_cgiOracle=org.hibernate.dialect.Oracle11cDialect
+
+# Jeongbonggyun
+#campusMysql
+#spring.jpa.database_campusMysql=default
+#spring.jpa.show-sql_campusMysql=true
+#spring.jpa.hibernate.ddl-auto_campusMysql=update
+#spring.jpa.database-platform_campusMysql=org.hibernate.dialect.MySQLDialect
+#spring.jpa.generate-ddl_campusMysql=true
+#spring.jpa.hibernate.naming.physical-strategy_campusMysql=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#spring.jpa.properties.hibernate.dialect_campusMysql=org.hibernate.dialect.MySQL5InnoDBDialect
+
+# aiacademyMysql
+#spring.jpa.database_aiacademyMysql=default
+#spring.jpa.show-sql_aiacademyMysql=true
+#spring.jpa.hibernate.ddl-auto_aiacademyMysql=update
+#spring.jpa.database-platform_aiacademyMysql=org.hibernate.dialect.MySQLDialect
+#spring.jpa.generate-ddl_aiacademyMysql=true
+#spring.jpa.hibernate.naming.physical-strategy_aiacademyMysql=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#spring.jpa.properties.hibernate.dialect_aiacademyMysql=org.hibernate.dialect.MySQL5InnoDBDialect
+
+#cgiMysql
+#spring.jpa.database_cgiMysql=default
+#spring.jpa.show-sql_cgiMysql=true
+#spring.jpa.hibernate.ddl-auto_cgiMysql=update
+#spring.jpa.database-platform_cgiMysql=org.hibernate.dialect.MySQLDialect
+#spring.jpa.generate-ddl_cgiMysql=true
+#spring.jpa.hibernate.naming.physical-strategy_cgiMysql=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#spring.jpa.properties.hibernate.dialect_cgiMysql=org.hibernate.dialect.MySQL5InnoDBDialect
+
+# 230915 maria
+#campusMaria
+#spring.jpa.database_campusMaria=default
+#spring.jpa.show-sql_campusMaria=true
+#spring.jpa.hibernate.ddl-auto_campusMaria=update
+#spring.jpa.database-platform_campusMaria=org.hibernate.dialect.MySQLDialect
+#spring.jpa.generate-ddl_campusMaria=true
+#spring.jpa.hibernate.naming.physical-strategy_campusMaria=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#spring.jpa.properties.hibernate.dialect_campusMaria=org.hibernate.dialect.MySQL5InnoDBDialect
+
+# aiacademyMaria
+#spring.jpa.database_aiacademyMaria=default
+#spring.jpa.show-sql_aiacademyMaria=true
+#spring.jpa.hibernate.ddl-auto_aiacademyMaria=update
+#spring.jpa.database-platform_aiacademyMaria=org.hibernate.dialect.MySQLDialect
+#spring.jpa.generate-ddl_aiacademyMaria=true
+#spring.jpa.hibernate.naming.physical-strategy_aiacademyMaria=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#spring.jpa.properties.hibernate.dialect_aiacademyMaria=org.hibernate.dialect.MySQL5InnoDBDialect
+
+##cgiMaria
+#spring.jpa.database_cgiMaria=default
+#spring.jpa.show-sql_cgiMaria=true
+#spring.jpa.hibernate.ddl-auto_cgiMaria=update
+#spring.jpa.database-platform_cgiMaria=org.hibernate.dialect.MySQLDialect
+#spring.jpa.generate-ddl_cgiMaria=true
+#spring.jpa.hibernate.naming.physical-strategy_cgiMaria=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#spring.jpa.properties.hibernate.dialect_cgiMaria=org.hibernate.dialect.MySQL5InnoDBDialect
+
+## Logging Level
+logging.level.org.hibernate.type.descriptor.sql=debug
+
+##keystore
+#server.ssl.key-store=classpath:smhrd-keystore.p12
+#server.ssl.key-store-password=smhrd20@2
+#server.ssl.key-store-type=PKCS12
+#server.ssl.keyAlias=smhrd-keystore
+#server.http2.enabled=true
+
+
+#Request Size
+server.max-http-header-size=1000000
+
+#fileSize
+spring.servlet.multipart.max-file-size=200MB
+spring.servlet.multipart.max-request-size=200MB
+
+

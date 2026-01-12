@@ -1,0 +1,66 @@
+package com.smhrd.project.config;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
+
+@Configuration
+@EnableJpaRepositories(basePackages = "com.smhrd.project.cgiOracleRepo", entityManagerFactoryRef = "cgiOracleEntityManagerFactory", transactionManagerRef = "cgiOracleTransactionManager")
+@MapperScan(basePackages = "com.smhrd.project.cgiOracleMapper", sqlSessionFactoryRef = "cgiOracleSessionFactory")
+public class DataBaseCGIOracleConfig {
+
+	private Map<String, Object> getVendorProperties() {
+		Map<String, Object> properties = new HashMap<>();
+		properties.put("hibernate.dialect", "org.hibernate.dialect.Oracle12cDialect");
+		return properties;
+	}
+
+	@Bean(name = "cgiOracleDataSource")
+	@ConfigurationProperties(prefix = "spring.datasource.cgi-oracle")
+	public DataSource cgiOracleDataSource() {
+		return DataSourceBuilder.create().build();
+	}
+
+	@Bean(name = "cgiOracleEntityManagerFactory")
+	public LocalContainerEntityManagerFactoryBean cgiOracleEntityManagerFactory(EntityManagerFactoryBuilder builder,
+			@Qualifier("cgiOracleDataSource") DataSource dataSource) {
+		return builder.dataSource(cgiOracleDataSource()).packages("com.smhrd.project.cgiOracleDomain") // CGI Oracle 엔티티
+																										// 패키지 경로
+				.persistenceUnit("cgioracle").properties(getVendorProperties()).build();
+	}
+
+	@Bean(name = "cgiOracleTransactionManager")
+	public PlatformTransactionManager cgiOracleTransactionManager(
+			@Qualifier("cgiOracleEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
+		return new JpaTransactionManager(entityManagerFactory);
+	}
+
+	@Bean(name = "cgiOracleSessionFactory")
+	public SqlSessionFactory cgiOracleSqlSessionFactory(@Qualifier("cgiOracleDataSource") DataSource dataSource)
+			throws Exception {
+		SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
+		sessionFactoryBean.setDataSource(dataSource);
+		Resource[] resources = new PathMatchingResourcePatternResolver()
+				.getResources("classpath*:com/smhrd/project/mapper/CGIOracleMapper.xml");
+		sessionFactoryBean.setMapperLocations(resources);
+		return sessionFactoryBean.getObject();
+	}
+}

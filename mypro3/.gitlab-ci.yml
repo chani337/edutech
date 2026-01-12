@@ -1,0 +1,24 @@
+#before_script:
+#  - echo "hello"
+#stages:
+#  - build
+#  - deploy
+
+#variables:
+#  IMAGE_NAME: edusmhrd.ddns.net:5000/project_smhrd/front:v01
+#  GIT_STRATEGY: clone
+
+#cache:
+#  paths:
+#    - node_modules/
+
+#build:
+#  stage: build
+#  tags:
+#    - front
+#  script:
+#    - ls -al
+#    - docker container ls -a
+#    - docker build . -t $IMAGE_NAME
+#    - docker push $IMAGE_NAME
+#    - docker images | grep 'edusmhrd.ddns.net'

@@ -1,0 +1,64 @@
+package com.smhrd.project.config;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
+
+@Configuration
+@MapperScan(basePackages = "com.smhrd.project.cgiMysqlMapper", sqlSessionFactoryRef = "cgiMysqlSessionFactory")
+public class DataBaseCGIMysqlConfig {
+
+	private Map<String, Object> getVendorProperties() {
+		Map<String, Object> properties = new HashMap<>();
+		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+		return properties;
+	}
+
+	@Bean(name = "cgiMysqlDataSource")
+	@ConfigurationProperties(prefix = "spring.datasource.cgi-mysql")
+	public DataSource cgiMysqlDataSource() {
+		return DataSourceBuilder.create().build();
+	}
+
+	@Bean(name = "cgiMysqlEntityManagerFactory")
+	public LocalContainerEntityManagerFactoryBean cgiMysqlEntityManagerFactory(EntityManagerFactoryBuilder builder,
+			@Qualifier("cgiMysqlDataSource") DataSource dataSource) {
+		return builder.dataSource(cgiMysqlDataSource()).packages("com.smhrd.project.cgiMysqlDomain") // Oracle 엔티티
+																											// 패키지 경로
+				.persistenceUnit("cgiMysql").properties(getVendorProperties()).build();
+	}
+
+	@Bean(name = "cgiMysqlTransactionManager")
+	public PlatformTransactionManager cgiMysqlTransactionManager(
+			@Qualifier("cgiMysqlEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
+		return new JpaTransactionManager(entityManagerFactory);
+	}
+
+	@Bean(name = "cgiMysqlSessionFactory")
+	public SqlSessionFactory MysqlSqlSessionFactory(@Qualifier("cgiMysqlDataSource") DataSource dataSource)
+			throws Exception {
+		SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
+		sessionFactoryBean.setDataSource(dataSource);
+		Resource[] resources = new PathMatchingResourcePatternResolver()
+				.getResources("classpath*:com/smhrd/project/mapper/CGIMysqlMapper.xml");
+		sessionFactoryBean.setMapperLocations(resources);
+		return sessionFactoryBean.getObject();
+	}
+}

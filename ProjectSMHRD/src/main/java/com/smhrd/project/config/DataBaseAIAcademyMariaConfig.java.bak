@@ -1,0 +1,62 @@
+//package com.smhrd.project.config;
+//
+//import java.util.HashMap;
+//import java.util.Map;
+//
+//import javax.persistence.EntityManagerFactory;
+//import javax.sql.DataSource;
+//
+//import org.apache.ibatis.session.SqlSessionFactory;
+//import org.mybatis.spring.SqlSessionFactoryBean;
+//import org.mybatis.spring.annotation.MapperScan;
+//import org.springframework.beans.factory.annotation.Qualifier;
+//import org.springframework.boot.context.properties.ConfigurationProperties;
+//import org.springframework.boot.jdbc.DataSourceBuilder;
+//import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.core.io.Resource;
+//import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+//import org.springframework.orm.jpa.JpaTransactionManager;
+//import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+//import org.springframework.transaction.PlatformTransactionManager;
+//
+//@Configuration
+//@MapperScan(basePackages = "com.smhrd.project.aiAcademyMariaMapper", sqlSessionFactoryRef = "aiAcademyMariaSessionFactory")
+//public class DataBaseAIAcademyMariaConfig {
+//	private Map<String, Object> getVendorProperties() {
+//		Map<String, Object> properties = new HashMap<>();
+//		properties.put("hibernate.dialect", "org.hibernate.dialect.MariaDBDialect");
+//		return properties;
+//	}
+//
+//	@Bean(name = "aiAcademyMariaDataSource")
+//	@ConfigurationProperties(prefix = "spring.datasource.aiacademy-maria")
+//	public DataSource aiAcademyMariaDataSource() {
+//		return DataSourceBuilder.create().build();
+//	}
+//
+//	@Bean(name = "aiAcademyMariaEntityManagerFactory")
+//	public LocalContainerEntityManagerFactoryBean aiAcademyMariaEntityManagerFactory(EntityManagerFactoryBuilder builder,
+//			@Qualifier("aiAcademyMariaDataSource") DataSource dataSource) {
+//		return builder.dataSource(aiAcademyMariaDataSource()).packages("com.smhrd.project.aiAcademyMariaDomain")
+//				.persistenceUnit("aiAcademyMaria").properties(getVendorProperties()).build();
+//	}
+//
+//	@Bean(name = "aiAcademyMariaTransactionManager")
+//	public PlatformTransactionManager aiAcademyMariaTransactionManager(
+//			@Qualifier("aiAcademyMariaEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
+//		return new JpaTransactionManager(entityManagerFactory);
+//	}
+//
+//	@Bean(name = "aiAcademyMariaSessionFactory")
+//	public SqlSessionFactory MariaSqlSessionFactory(@Qualifier("aiAcademyMariaDataSource") DataSource dataSource)
+//			throws Exception {
+//		SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
+//		sessionFactoryBean.setDataSource(dataSource);
+//		Resource[] resources = new PathMatchingResourcePatternResolver()
+//				.getResources("classpath*:com/smhrd/project/mapper/AIAcademyMariaMapper.xml");
+//		sessionFactoryBean.setMapperLocations(resources);
+//		return sessionFactoryBean.getObject();
+//	}
+//}

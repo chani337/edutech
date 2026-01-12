@@ -1,0 +1,45 @@
+.p-container {
+  background-color: whitesmoke;
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .p-footer {
+    width: 90%;
+  }
+}
+
+.p-contents {
+  background-color: white;
+  width: 90%;
+  height: 85%;
+
+  overflow: auto;
+  padding: 4%;
+
+  h1 {
+    margin-top: 3%;
+    font-size: 2em;
+  }
+
+  p{
+    margin-top: 2%;
+    font-size: 1.3em;
+  }
+
+}
+
+.btn-container{
+  display: flex;
+  justify-content: center;
+  
+}
+
+a{
+  text-decoration: none;
+  color: rgb(0, 23, 105);
+}
