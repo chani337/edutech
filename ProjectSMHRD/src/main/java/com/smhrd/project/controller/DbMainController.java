@@ -190,13 +190,14 @@ public class DbMainController {
 		JsonArray okArr = new JsonArray();
 
 		for (int i = 0; i < dbOkList.size(); i++) {
+
 			DBUser dbOkUser = dbOkList.get(i);
+
 			Map<String, Object> info = service.getDbRequestUser(dbOkUser.getMem_email());
-			JsonObject classJO = new JsonObject();
-			if (info != null) {
-				JsonElement jsonElement = gson.toJsonTree(info);
-				classJO = jsonElement.getAsJsonObject();
-			}
+
+			JsonElement jsonElement = gson.toJsonTree(info);
+			JsonObject classJO = jsonElement.getAsJsonObject();
+
 			int pro_ctg_num = dbOkUser.getPro_ctg_num();
 			String pro_type = "";
 			// 0- 미니 , 1 -핵심, 2- 실전
@@ -207,13 +208,16 @@ public class DbMainController {
 			} else if (pro_ctg_num == 3) {
 				pro_type = "실전";
 			}
+
 			classJO.addProperty("pro_ctg", pro_type);
 			classJO.addProperty("db_type", dbOkUser.getDb_type());
 			classJO.addProperty("db_user", dbOkUser.getDb_user());
 			classJO.addProperty("db_pw", dbOkUser.getDb_pw());
+
 			String req_user = service.getUserName(dbOkUser.getMem_email());
 			classJO.addProperty("req_user", req_user);
 			okArr.add(classJO);
+
 		}
 		// System.out.println(result);
 
