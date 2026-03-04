@@ -26,7 +26,7 @@ const AppFooter = () => {
       </div>
       <div className="ms-auto">
         <span className="me-1">Developed by</span>
-        <span>황해도,임명진,강예진,박수현,정형,임승환,정봉균</span>
+        <span>황해도,임명진,강예진,박수현,정형,임승환,정봉균,이찬희</span>
       </div>
     </CFooter>
   )

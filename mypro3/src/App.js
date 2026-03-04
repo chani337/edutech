@@ -46,6 +46,7 @@ class App extends Component {
           <Suspense fallback={loading}>
             <Routes>
               <Route path="/base/*" name="Base" element={<DefaultLayout />} />
+              <Route path="/forms/*" name="Forms" element={<DefaultLayout />} />
               <Route path="/erro" name="Erro" element={<Page404></Page404>}></Route>
               <Route exact path="/register" name="Register Page" element={<Register />} />
 

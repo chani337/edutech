@@ -24,6 +24,8 @@ const Select = React.lazy(() => import('./views/forms/select/Select'))
 const Login = React.lazy(() => import('./views/pages/login/Login'))
 const Erro = React.lazy(() => import('./views/pages/page404/Page404'))
 
+const MentoringStatus = React.lazy(() => import('./views/mentoring/MentoringStatus'))
+
 const routes = [
   // 에러페이지
   { path: '*', name: 'Err', element: Erro },
@@ -91,6 +93,9 @@ const routes = [
   { path: '/forms/db/user_ok', name: 'DB UserOk', element: DBUserOkPage },
   // 회원관리
   { path: '/forms/select', name: '회원등급관리', element: Select },
+
+  // 멘토링
+  { path: '/mentoring/status', name: '멘토링 현황', element: MentoringStatus },
 ]
 
 export default routes
