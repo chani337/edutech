@@ -130,6 +130,18 @@ const list = [
   },
   {
     component: CNavTitle,
+    name: '멘토링',
+    level: 0,
+  },
+  {
+    component: CNavItem,
+    name: '멘토링 현황',
+    to: '/base/mentoring/status',
+    level: 0,
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavTitle,
     name: '회원관리',
     level: 3,
   },
