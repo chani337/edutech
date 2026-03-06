@@ -34,9 +34,9 @@ const DBUserOkPage = () => {
   const getDBUserList = () => {
     const memLevel = window.localStorage.getItem('mem_level')
     const classCode = window.localStorage.getItem('class_code')
-    // 마스터 권한이면 class_code 없이 요청 (모든 요청 조회)
+    // 마스터 또는 관리자 권한이면 class_code 없이 요청 (모든 요청 조회)
     const requestData =
-      memLevel === '마스터'
+      memLevel === '마스터' || memLevel === '관리자'
         ? { mem_level: memLevel }
         : { class_code: classCode, mem_level: memLevel }
 
