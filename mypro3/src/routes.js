@@ -25,6 +25,7 @@ const Login = React.lazy(() => import('./views/pages/login/Login'))
 const Erro = React.lazy(() => import('./views/pages/page404/Page404'))
 
 const MentoringStatus = React.lazy(() => import('./views/mentoring/MentoringStatus'))
+const ProjectInsertPage = React.lazy(() => import('./views/forms/form-control/ProjectInsertPage'))
 
 const routes = [
   // 에러페이지
@@ -81,6 +82,7 @@ const routes = [
 
   //프로젝트 입력페이지
   { path: '/buttons/buttons', name: 'Buttons', element: Buttons },
+  { path: '/project/insert', name: 'Project Insert', element: ProjectInsertPage },
 
   //프로젝트 사용기술
   { path: '/forms', name: 'Forms', element: MDViewrPage },
