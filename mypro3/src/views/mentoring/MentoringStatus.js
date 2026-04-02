@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
+/* Prettier 스타일 규칙 위반 경고/에러를 무시 설정 */
 import React, { useState } from 'react'
+import axios from 'axios'
 import {
     CButton,
     CCard,
@@ -45,20 +47,36 @@ const MentoringStatus = () => {
     }
 
     // 멘토링 개설 저장 버튼 클릭 핸들러
-    const handleSaveMeeting = () => {
-        const newMeeting = {
-            id: Date.now(), // 고유 ID 생성용
-            title: formData.title || '제목 없음',
-            time: formData.time || '미정',
-            headcount: `0/${formData.maxHeadcount}`,
-            students: '참여자 : 없음',
-            status: 'upcoming', // 새로 만들면 기본으로 진행 예정
-        }
+    const handleSaveMeeting = async () => {
+        try {
+            // 백엔드(Spring Boot)에 두레이 화상미팅 개설 요청
+            const response = await axios.post('http://localhost:8070/project-smhrd/api/mentoring/meeting', {
+                title: formData.title || '제목 없음'
+            });
 
-        // 기존 배열 맨 앞에 새 배열 추가
-        setMeetings([newMeeting, ...meetings])
-        setModalVisible(false) // 모달 닫기
-        setFormData({ title: '', time: '', maxHeadcount: 4 }) // 폼 초기화
+            // API 응답 결과에서 미팅 정보 추출 (Dooray API 응답: { header: {...}, result: { meetingUrl: "..." } })
+            const resultData = response.data.result || {};
+            const meetingUrl = resultData.meetingUrl || '';
+            const meetingId = resultData.id || Date.now();
+
+            const newMeeting = {
+                id: meetingId, // 두레이에서 발급한 ID 사용
+                title: formData.title || '제목 없음',
+                time: formData.time || '미정',
+                headcount: `0/${formData.maxHeadcount}`,
+                students: '참여자 : 없음',
+                status: 'upcoming', // 새로 만들면 기본으로 진행 예정
+                meetingUrl: meetingUrl // 발급받은 화상미팅 URL을 데이터에 저장
+            }
+
+            // 기존 배열 맨 앞에 새 배열 추가
+            setMeetings([newMeeting, ...meetings])
+            setModalVisible(false) // 모달 닫기
+            setFormData({ title: '', time: '', maxHeadcount: 4 }) // 폼 초기화
+        } catch (error) {
+            console.error('화상미팅 생성 중 오류 발생:', error);
+            alert('화상미팅 개설에 실패했습니다. 관리자에게 문의해주세요.');
+        }
     }
 
     // 화면에 보여줄 데이터 필터링 (탭 + 검색어)
@@ -220,7 +238,10 @@ const MentoringStatus = () => {
                                             </div>
                                             <CButton
                                                 color="dark"
-                                                disabled={item.status === 'completed'} // 완료된 미팅은 버튼 비활성화
+                                                disabled={item.status === 'completed' || !item.meetingUrl} // URL이 없으면 버튼 잠금
+                                                onClick={() => {
+                                                    if (item.meetingUrl) window.open(item.meetingUrl, '_blank')
+                                                }}
                                                 style={{
                                                     borderRadius: '0.3rem',
                                                     padding: '0.5rem 1.2rem',
