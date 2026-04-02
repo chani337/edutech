@@ -20,6 +20,7 @@ import com.smhrd.project.domain.ProDetail;
 import com.smhrd.project.domain.ProFunction;
 import com.smhrd.project.domain.ProIot;
 import com.smhrd.project.domain.ProjectList;
+import com.smhrd.project.domain.ProjectInsertDTO;
 import com.smhrd.project.domain.User;
 
 @Service
@@ -90,5 +91,23 @@ public class ProjectService {
 		return mapper.docu_plan(pro_num);
 	}
 
+	@Transactional(transactionManager = "mainTransactionManager")
+	public void insertProjectFullInfo(ProjectInsertDTO dto, List<ProDetail> details) {
+		// 1. Basic 테이블 등록 및 pro_num 동적 할당
+		mapper.insertProjectBasic(dto);
+		
+		System.out.println("Generated Project Num : " + dto.getPro_num());
+		
+		// 2. 함께 저장된 URL 디테일 정보들 (썸네일, 영상 등) 반복 인서트
+		for(ProDetail d : details) {
+			d.setPro_num(dto.getPro_num());
+			mapper.insertProDetail(d);
+		}
+	}
+	
+	@Transactional(transactionManager = "mainTransactionManager")
+	public void insertProDetailOnly(ProDetail detail) {
+		mapper.insertProDetail(detail);
+	}
 	
 }

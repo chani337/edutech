@@ -14,6 +14,7 @@ import com.smhrd.project.domain.ProDetail;
 import com.smhrd.project.domain.ProFunction;
 import com.smhrd.project.domain.ProIot;
 import com.smhrd.project.domain.ProjectList;
+import com.smhrd.project.domain.ProjectInsertDTO;
 
 @Mapper
 @Qualifier("mainDataSource")
@@ -36,5 +37,8 @@ public interface ProjectMapper {
 	
 	public String getProjectCnt();
 	
+	// 프로젝트 추가용 DB Insert 메소드
+	public int insertProjectBasic(ProjectInsertDTO dto);
+	public int insertProDetail(ProDetail detail);
 	
 }

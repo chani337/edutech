@@ -123,8 +123,15 @@ const list = [
   // 7. 프로젝트 입력(마스터)
   {
     component: CNavItem,
-    name: '프로젝트 입력페이지',
+    name: '프로젝트 입력페이지(기존)',
     to: '/base/buttons/buttons',
+    level: 3,
+    icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: '신규 프로젝트(산출물) 일괄등록',
+    to: '/base/project/insert',
     level: 3,
     icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
