@@ -75,4 +75,17 @@
 		select curri.curri_name, c.curri_cnt from class_ c Left outer join curriculum curri on c.curri_code = curri.curri_code where c.class_code = (select class_code from member where mem_email = (select mem1 from pro_basic where pro_num = #{pro_num})) 
 	</select>
 	
+	<!-- 웹페이지 직접 등록 (자동 키 매핑) -->
+	<insert id="insertProjectBasic" parameterType="com.smhrd.project.domain.ProjectInsertDTO" useGeneratedKeys="true" keyProperty="pro_num">
+		INSERT INTO pro_basic
+		(pro_name, pro_theme, pro_team, pro_prize, pro_type, pro_nutshell, ctg_num, ctg_num2, dtype_num, dtype_num2, pro_ctg_num)
+		VALUES
+		(#{pro_name}, #{pro_theme}, #{pro_team}, #{pro_prize}, #{pro_type}, #{pro_nutshell}, #{ctg_num}, #{ctg_num2}, #{dtype_num}, #{dtype_num2}, #{pro_ctg_num})
+	</insert>
+
+	<insert id="insertProDetail" parameterType="com.smhrd.project.domain.ProDetail">
+		INSERT INTO pro_detail (pro_num, pro_detail_type, pro_detail_url) 
+		VALUES (#{pro_num}, #{pro_detail_type}, #{pro_detail_url})
+	</insert>
+	
 </mapper>
