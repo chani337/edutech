@@ -48,54 +48,29 @@ const Register = () => {
     console.log(e)
     classCheck = e.target.value
   }
-  //과정명 불러오기
+  //과정명 직접 하드코딩
   async function classes() {
-    await axios
-      .get('/project-smhrd/user/classes')
-      .then((res) => {
-        console.log(res)
-        let jsCnt = 0
-        let viCnt = 0
-        let iotCnt = 0
-        let classList = [{ value: '0', label: '과정명 선택' }]
-
-        for (let i = 0; i < res.data.length; i++) {
-          if (res.data[i].curri_name.includes('JS')) {
-            if (jsCnt == 0) {
-              res.data[i].curri_name += '_A'
-              jsCnt++
-            } else {
-              res.data[i].curri_name += '_B'
-            }
-          } else if (res.data[i].curri_name.includes('시각지능')) {
-            if (viCnt == 0) {
-              res.data[i].curri_name += '_A'
-              viCnt++
-            } else {
-              res.data[i].curri_name += '_B'
-            }
-          } else if (res.data[i].curri_name.includes('사물지능')) {
-            if (iotCnt == 0) {
-              res.data[i].curri_name += '_A'
-              iotCnt++
-            } else {
-              res.data[i].curri_name += '_B'
-            }
-          }
-          if (!res.data[i].curri_name.includes('AI')) {
-            res.data[i].curri_name += '_' + res.data[i].curri_cnt + '회차'
-          }
-
-          res.data[i].value = i + 1
-          res.data[i].label = res.data[i].curri_name
-          classList.push(res.data[i])
-        }
-
-        setClass(classList)
-      })
-      .catch((err) => {
-        toast.error('과정명 데이터 불러오기 실패 관리자에게 문의 해주세요')
-      })
+    let customList = [
+      { value: '0', label: '과정명 선택', class_code: null },
+      { value: '1', label: '수료생', class_code: 'ALUM_01' },
+      { value: '2', label: 'LG전자 DX School - 10회차', class_code: 'LG_DX_10' },
+      { value: '3', label: 'LG전자 DX School - 11회차', class_code: 'LG_DX_11' },
+      { value: '4', label: '(EST)AI백엔드과정', class_code: 'EST_BE_1' },
+      { value: '5', label: '(EST)AI모델과정', class_code: 'EST_MODEL_1' },
+      { value: '6', label: 'AI활용 헬스케어 서비스 개발자과정 - 2회차', class_code: 'AI_HEALTH_2' },
+      { value: '7', label: '언어지능기반 분석서비스 개발자과정 - 9회차', class_code: 'LANG_DEV_9' },
+      {
+        value: '8',
+        label: '언어지능기반 분석서비스 개발자과정 - 11회차(예정)',
+        class_code: 'LANG_DEV_11',
+      },
+      {
+        value: '9',
+        label: '언어지능기반 분석서비스 개발자과정 - 12회차(예정)',
+        class_code: 'LANG_DEV_12',
+      },
+    ]
+    setClass(customList)
   }
 
   const tryJoin = () => {
