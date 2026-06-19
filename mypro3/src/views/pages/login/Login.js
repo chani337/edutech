@@ -172,7 +172,7 @@ const Login = () => {
 
   const start = () => {
     gapi.client.init({
-      clientId: '407040727643-v5l2rmgvuh6ootj330f8o6mavi9rilb1.apps.googleusercontent.com',
+      clientId: googleClientId || '407040727643-v5l2rmgvuh6ootj330f8o6mavi9rilb1.apps.googleusercontent.com',
       scope: 'email',
     })
   }
@@ -240,7 +240,7 @@ const Login = () => {
                     >
                       <GoogleLogin
                         className="mb-2 loginBtn"
-                        clientId="407040727643-v5l2rmgvuh6ootj330f8o6mavi9rilb1.apps.googleusercontent.com"
+                        clientId={googleClientId || "407040727643-v5l2rmgvuh6ootj330f8o6mavi9rilb1.apps.googleusercontent.com"}
                         onSuccess={onSuccess}
                         onFailure={onFailure}
                         buttonText="구글로그인"
