@@ -2,7 +2,7 @@
 
 // 백엔드 서버 주소 (context path 포함)
 // 백엔드는 FTP 서버(edusmhrd.ddns.net:26)의 /usr/local/data/project 경로와 연결되어 있음
-const API_BASE_URL = 'http://localhost:8070/project-smhrd'
+const API_BASE_URL = 'http://223.130.155.226:8070/project-smhrd'
 
 /**
  * 백엔드에서 받은 이미지 URL을 로컬 서버 URL로 변환

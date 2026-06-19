@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* Prettier 스타일 규칙 위반 경고/에러를 무시 설정 */
 import React, { useState } from 'react'
-import axios from 'axios'
+import axios from '../../../axios'
 import {
     CButton,
     CCard,
@@ -50,7 +50,7 @@ const MentoringStatus = () => {
     const handleSaveMeeting = async () => {
         try {
             // 백엔드(Spring Boot)에 두레이 화상미팅 개설 요청
-            const response = await axios.post('http://localhost:8070/project-smhrd/api/mentoring/meeting', {
+            const response = await axios.post('/project-smhrd/api/mentoring/meeting', {
                 title: formData.title || '제목 없음'
             });
 

@@ -24,7 +24,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         // CORS 설정 - 프론트엔드에서 접근 가능하도록
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000", "http://172.30.1.254:3000")
+                .allowedOrigins("http://localhost:3000", "http://172.30.1.254:3000", "http://223.130.155.226:3000")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);

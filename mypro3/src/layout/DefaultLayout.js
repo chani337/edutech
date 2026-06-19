@@ -2,6 +2,7 @@ import React, { Suspense, useEffect, useState, createContext } from 'react'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import Chatbot from '../components/Chatbot/Chatbot'
 
 export const LodingConText = createContext()
 
@@ -33,6 +34,7 @@ const DefaultLayout = () => {
             <AppContent></AppContent>
           </div>
           <AppFooter />
+          <Chatbot />
         </div>
       </LodingConText.Provider>
     </div>

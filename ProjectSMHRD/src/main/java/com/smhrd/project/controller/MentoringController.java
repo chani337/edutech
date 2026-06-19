@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@CrossOrigin("http://localhost:3000") // 프론트엔드 URL 허용
+@CrossOrigin({"http://localhost:3000", "http://223.130.155.226:3000"}) // 프론트엔드 URL 허용
 @RequestMapping("/api/mentoring")
 public class MentoringController {
 
