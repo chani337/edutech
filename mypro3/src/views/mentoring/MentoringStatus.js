@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* Prettier 스타일 규칙 위반 경고/에러를 무시 설정 */
 import React, { useState } from 'react'
-import axios from '../../../axios'
+import axios from '../../axios'
 import {
     CButton,
     CCard,

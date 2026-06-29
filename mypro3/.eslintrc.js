@@ -25,13 +25,7 @@ module.exports = {
     'react/prop-types': 'off',
   },
   rules: {
-    'prettier/prettier': [
-      'error',
-      {
-        endOfLine: 'auto',
-      },
-    ],
-
+    'prettier/prettier': 'off',
     'react/prop-types': 'off',
   },
 }
