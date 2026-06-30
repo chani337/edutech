@@ -19,13 +19,13 @@ import { cilLockLocked, cilUser } from '@coreui/icons'
 import { useEffect, useState, useRef } from 'react'
 import qs from 'qs'
 import axios from '../../../axios'
-import { GoogleLogin, GoogleLogout } from 'react-google-login'
-import { gapi } from 'gapi-script'
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
+import { jwtDecode } from 'jwt-decode'
 import { toast } from 'react-custom-alert'
 import 'react-custom-alert/dist/index.css'
 
 const Login = () => {
-  const googleRef = useRef()
+  const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || '839524259619-qnp7m10ids7i5up6tfd42h7t8qkbc0nb.apps.googleusercontent.com'
 
   const nav = useNavigate()
   const [code, setCode] = useState()
@@ -35,7 +35,6 @@ const Login = () => {
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
 
   //google로그인 정보
-  const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
   //이메일을 넘겨받아서 서버로 요청하는 tryLogin
   const tryLogin = (getEmail) => {
@@ -152,14 +151,12 @@ const Login = () => {
   // }
 
   //GoogleLogin
-  const onSuccess = (response) => {
-    tryLogin(response.profileObj.email)
+  const onGoogleSuccess = (credentialResponse) => {
+    const decoded = jwtDecode(credentialResponse.credential)
+    tryLogin(decoded.email)
   }
-  const onFailure = (response) => {
-    //console.log('FAILED', response)
-  }
-  const onLogoutSuccess = () => {
-    // console.log('SUCESS LOG OUT')
+  const onGoogleError = () => {
+    //console.log('Google Login Failed')
   }
 
   useEffect(() => {
@@ -171,132 +168,62 @@ const Login = () => {
     // userAccessToken()
   }, [code])
 
-  const start = () => {
-    gapi.client.init({
-      clientId: googleClientId || '407040727643-v5l2rmgvuh6ootj330f8o6mavi9rilb1.apps.googleusercontent.com',
-      scope: 'email',
-    })
-  }
 
-  useEffect(() => {
-    gapi.load('client:auth2', start)
-  }, [])
-
-  function tryGoolgeLogin() {
-    googleRef.current.children[0].click()
-  }
 
   return (
-    <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
-      <CContainer style={{ maxWidth: '700px' }}>
-        <CRow className="justify-content-center">
-          <CCol md={8}>
-            <CCardGroup>
-              <CCard className="p-4">
-                <CCardBody>
-                  <CForm style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <h1>Login</h1>
-                    <p className="text-medium-emphasis">Sign In to your account</p>
+    <GoogleOAuthProvider clientId={googleClientId}>
+      <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
+        <CContainer style={{ maxWidth: '700px' }}>
+          <CRow className="justify-content-center">
+            <CCol md={8}>
+              <CCardGroup>
+                <CCard className="p-4">
+                  <CCardBody>
+                    <CForm style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                      <h1>Login</h1>
+                      <p className="text-medium-emphasis">Sign In to your account</p>
 
-                    {/* <CInputGroup className="mb-1 for-center">
-                      <button
-                        style={{
-                          backgroundImage: 'url("img/kakao_login.png")',
-                          backgroundSize: 'cover',
-                          width: '250px',
-                          height: '35px',
-                        }}
-                        type="button"
-                        className="loginBtn"
-                        onClick={() => {
-                          //getToken()
-                          redirectKakaoLogin()
-                        }}
-                      ></button>
-                    </CInputGroup> */}
-                    {/* <CInputGroup className="mb-2">
-                      <button
-                        id="naverIdLogin"
-                        ref={naverRef}
-                        type="button"
-                        style={{ display: 'none' }}
-                      ></button>
-                      <button
-                        style={{
-                          backgroundImage: 'url("img/naver_login.png")',
-                          backgroundSize: 'cover',
-                          width: '250px',
-                          height: '35px',
-                        }}
-                        type="button"
-                        className="loginBtn"
-                        onClick={handleClick}
-                      ></button>
-                    </CInputGroup> */}
-
-                    {/* 구글 로그인 */}
-                    <CInputGroup
-                      className="mb-2 loginBtn"
-                      style={{ width: '250px', height: '35px' }}
-                    >
-                      <GoogleLogin
-                        className="mb-2 loginBtn"
-                        clientId={googleClientId || "407040727643-v5l2rmgvuh6ootj330f8o6mavi9rilb1.apps.googleusercontent.com"}
-                        onSuccess={onSuccess}
-                        onFailure={onFailure}
-                        buttonText="구글로그인"
-                        alignItems="center"
-                      ></GoogleLogin>
-
-                      {/* <div style={{ display: 'none' }} ref={googleRef}>
-                        <GoogleLogin
-                          className="mb-2 loginBtn"
-                          clientId="407040727643-v5l2rmgvuh6ootj330f8o6mavi9rilb1.apps.googleusercontent.com"
-                          onSuccess={onSuccess}
-                          onFailure={onFailure}
-                          buttonText="구글로그인"
-                          alignItems="center"
-                        ></GoogleLogin>
-                      </div>
-
-                      <button
-                        style={{
-                          backgroundImage: 'url("img/google_login.png")',
-                          backgroundSize: 'cover',
-                          width: '250px',
-                          height: '35px',
-                        }}
-                        className="loginBtn"
-                        onClick={tryGoolgeLogin}
-                      ></button> */}
-                    </CInputGroup>
-
-                    <CRow>
-                      <CCol
-                        xs={15}
-                        style={{
-                          display: 'flex',
-                          flexDirection: 'column',
-                          alignItems: 'center',
-                          marginTop: '1em',
-                        }}
+                      {/* 구글 로그인 */}
+                      <CInputGroup
+                        className="mb-2"
+                        style={{ display: 'flex', justifyContent: 'center' }}
                       >
-                        <p>아직 회원이 아니신가요?</p>
-                        <Link to="/register">
-                          <CButton color="primary" className="px-4">
-                            간편회원가입
-                          </CButton>
-                        </Link>
-                      </CCol>
-                    </CRow>
-                  </CForm>
-                </CCardBody>
-              </CCard>
-            </CCardGroup>
-          </CCol>
-        </CRow>
-      </CContainer>
-    </div>
+                        <GoogleLogin
+                          onSuccess={onGoogleSuccess}
+                          onError={onGoogleError}
+                          text="signin_with"
+                          shape="rectangular"
+                          width="250"
+                        />
+                      </CInputGroup>
+
+                      <CRow>
+                        <CCol
+                          xs={15}
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            marginTop: '1em',
+                          }}
+                        >
+                          <p>아직 회원이 아니신가요?</p>
+                          <Link to="/register">
+                            <CButton color="primary" className="px-4">
+                              간편회원가입
+                            </CButton>
+                          </Link>
+                        </CCol>
+                      </CRow>
+                    </CForm>
+                  </CCardBody>
+                </CCard>
+              </CCardGroup>
+            </CCol>
+          </CRow>
+        </CContainer>
+      </div>
+    </GoogleOAuthProvider>
   )
 }
 

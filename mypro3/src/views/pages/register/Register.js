@@ -19,8 +19,8 @@ import { useEffect, useState, useRef } from 'react'
 import qs from 'qs'
 import axios from '../../../axios'
 import { Link, useNavigate } from 'react-router-dom'
-import { GoogleLogin, GoogleLogout } from 'react-google-login'
-import { gapi } from 'gapi-script'
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
+import { jwtDecode } from 'jwt-decode'
 import { toast } from 'react-custom-alert'
 import 'react-custom-alert/dist/index.css'
 
@@ -230,18 +230,13 @@ const Register = () => {
   const onLogoutSuccess = () => {}
 
   //googleLogin
-  useEffect(() => {
-    //console.log(googleClientId)
+  const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || '839524259619-qnp7m10ids7i5up6tfd42h7t8qkbc0nb.apps.googleusercontent.com'
 
-    function start() {
-      gapi.client.init({
-        clientId: '407040727643-v5l2rmgvuh6ootj330f8o6mavi9rilb1.apps.googleusercontent.com',
-        scope: 'email',
-      })
-    }
-
-    gapi.load('client:auth2', start)
-  }, [])
+  const onGoogleSuccess = (credentialResponse) => {
+    const decoded = jwtDecode(credentialResponse.credential)
+    setUserEmail(decoded.email)
+  }
+  const onGoogleError = () => {}
 
   function jugeEmail() {
     if (inputEmail == 0) {
@@ -251,9 +246,7 @@ const Register = () => {
     }
   }
 
-  function tryGoolgeLogin() {
-    googleRef.current.children[0].click()
-  }
+
 
   const linkStyle = {
     color: 'darkgrey',
@@ -264,6 +257,7 @@ const Register = () => {
   }
 
   return (
+    <GoogleOAuthProvider clientId={googleClientId}>
     <div
       className="bg-light min-vh-100 d-flex flex-row align-items-center"
       style={{ textAlign: 'center' }}
@@ -311,37 +305,16 @@ const Register = () => {
                     </CInputGroup> */}
                     {/* 구글 로그인 */}
                     <CInputGroup
-                      className="mb-2 loginBtn"
-                      style={{ width: '250px', height: '35px' }}
+                      className="mb-2"
+                      style={{ display: 'flex', justifyContent: 'center' }}
                     >
                       <GoogleLogin
-                        className="mb-2 loginBtn"
-                        clientId="407040727643-v5l2rmgvuh6ootj330f8o6mavi9rilb1.apps.googleusercontent.com"
-                        onSuccess={onSuccess}
-                        onFailure={onFailure}
-                        buttonText="구글로그인"
-                        alignItems="center"
-                      ></GoogleLogin>
-                      {/* <div style={{ display: 'none' }} ref={googleRef}>
-                        <GoogleLogin
-                          className="mb-2 loginBtn"
-                          clientId='407040727643-v5l2rmgvuh6ootj330f8o6mavi9rilb1.apps.googleusercontent.com'
-                          onSuccess={onSuccess}
-                          onFailure={onFailure}
-                          buttonText="구글로그인"
-                          alignItems="center"
-                        ></GoogleLogin>
-                      </div> */}
-                      {/* <button
-                        style={{
-                          backgroundImage: 'url("img/google_login.png")',
-                          backgroundSize: 'cover',
-                          width: '250px',
-                          height: '35px',
-                        }}
-                        className="loginBtn"
-                        onClick={tryGoolgeLogin}
-                      ></button> */}
+                        onSuccess={onGoogleSuccess}
+                        onError={onGoogleError}
+                        text="signin_with"
+                        shape="rectangular"
+                        width="250"
+                      />
                     </CInputGroup>
                     <CInputGroup style={{ display: 'grid' }}>
                       <CInputGroup className="mb-3" style={{ width: '16em', marginTop: '1em' }}>
@@ -440,6 +413,7 @@ const Register = () => {
         </CRow>
       </CContainer>
     </div>
+    </GoogleOAuthProvider>
   )
 }
 
