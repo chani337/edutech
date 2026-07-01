@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-const instance = axios.create({ baseURL: 'http://223.130.155.226:8070' })
-//const instance = axios.create({ baseURL: 'http://172.30.1.254:8070' })
-//const instance = axios.create({ baseURL: 'https://project.smhrd.com:8070' })
+const instance = axios.create({ baseURL: '' })
 
 export default instance
+
