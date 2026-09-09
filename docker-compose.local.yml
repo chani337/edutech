@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./ProjectSMHRD
+      dockerfile: Dockerfile.local
+    container_name: edutech-backend-local
+    ports:
+      - "8070:8070"
+    env_file:
+      - ./ProjectSMHRD/.env
+    volumes:
+      - ./ProjectSMHRD/data:/app/data
+
+  frontend:
+    build:
+      context: ./mypro3
+      dockerfile: Dockerfile.local
+    container_name: edutech-frontend-local
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./mypro3/.env
+    volumes:
+      - ./mypro3/src:/app/src
+    depends_on:
+      - backend
