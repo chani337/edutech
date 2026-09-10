@@ -30,6 +30,16 @@ export const convertImageUrl = (url) => {
     return converted
   }
 
+  // 도커 내부 프록시로 인해 backend:8070으로 넘어오는 URL을 localhost로 교체
+  if (url.includes('backend:8070')) {
+    let converted = url.replace(/https?:\/\/backend:8070\/project-smhrd/, API_BASE_URL)
+    converted = converted.replace(
+      /\/(PPT|DOC|IMG)(\d+)\.(JPG|jpg|PNG|png|pdf|PDF)$/i,
+      (match, p1, p2, p3) => `/${p1}/${p2}.${p3.toLowerCase()}`,
+    )
+    return converted
+  }
+
   // 상대 경로면 API_BASE_URL 추가
   if (!url.startsWith('http')) {
     let converted = API_BASE_URL + (url.startsWith('/') ? '' : '/') + url

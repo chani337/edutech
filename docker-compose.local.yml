@@ -1,28 +1,44 @@
 version: '3.8'
 
 services:
-  backend:
-    build:
-      context: ./ProjectSMHRD
-      dockerfile: Dockerfile.local
-    container_name: edutech-backend-local
-    ports:
-      - "8070:8070"
-    env_file:
-      - ./ProjectSMHRD/.env
-    volumes:
-      - ./ProjectSMHRD/data:/app/data
-
   frontend:
     build:
       context: ./mypro3
-      dockerfile: Dockerfile.local
-    container_name: edutech-frontend-local
+      dockerfile: Dockerfile
+    container_name: frontend
     ports:
       - "3000:3000"
-    env_file:
-      - ./mypro3/.env
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_PROXY_URL=http://backend:8070
+      - HOST=0.0.0.0
+      - BROWSER=none
+      - DISABLE_ESLINT_PLUGIN=true
+      - CHOKIDAR_USEPOLLING=false
+    stdin_open: true
+    tty: true
     volumes:
       - ./mypro3/src:/app/src
+      - ./mypro3/public:/app/public
     depends_on:
       - backend
+    restart: unless-stopped
+
+  backend:
+    image: maven:3.8-openjdk-8
+    container_name: backend
+    working_dir: /app
+    volumes:
+      - ./ProjectSMHRD:/app
+      - maven-repo:/root/.m2
+    ports:
+      - "8070:8070"
+    env_file:
+      - .env
+    command: mvn spring-boot:run
+    restart: unless-stopped
+
+
+
+volumes:
+  maven-repo:
